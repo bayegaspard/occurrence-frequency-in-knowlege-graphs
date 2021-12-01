@@ -1,2 +1,2 @@
-# co-occurance-frequency-in-knowlege-graphs
-co-occurance frequency in knowlege graphs
+# Occurrence-frequency-in-knowlege-graphs
+occurrence frequency in knowlege graphs
