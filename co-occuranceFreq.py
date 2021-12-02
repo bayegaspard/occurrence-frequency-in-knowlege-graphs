@@ -1,11 +1,11 @@
 import pandas as pd
 import math
+import numpy as np
 
+coocurance_freq = []
 concepts = "concepts.csv"
-first1 = []
-second2 = []
-third3 = []
-fourth4 = []
+# for i in range(100):
+#     print("item"+str(i)+"=[]")
 
 def extract_concepts():
     df=pd.read_csv("concepts.csv", index_col="images")
@@ -17,39 +17,67 @@ def extract_all_concepts(i):
     item = iter(extract_concepts().loc["i"+str(i)].values.tolist())
     return next(item) , next(item) , next(item),  next(item)
 
+# def check_if_in(item1,item2, listitem):
+#     if set([item1, item2]).issubset(set(listitem)):
+#         return True
+#     else:
+#         return False
+
+def all_in(candidates, sequence):
+    for element in candidates:
+        if element not in sequence:
+            return False
+    return True
+
 def getnl():
-    for i in range(len(extract_concepts().loc["i5"].values.tolist())):
-        item1, item2, item3, item4  = extract_all_concepts(i)
-        print(item1)
-        first = [first1.append(item1) for item1 in extract_concepts().loc["i"+str(i)].values.tolist() if item1 in extract_concepts().loc["i"+str(i)].values.tolist()]
-        second = [second2.append(item2) for item2 in extract_concepts().loc["i"+str(i)].values.tolist() if item2 in extract_concepts().loc["i"+str(i)].values.tolist()]
-        third = [third3.append(item3) for item3 in extract_concepts().loc["i"+str(i)].values.tolist() if item3 in extract_concepts().loc["i"+str(i)].values.tolist()]
-        fourth = [fourth4.append(item4) for item4 in extract_concepts().loc["i"+str(i)].values.tolist() if item4 in extract_concepts().loc["i"+str(i)].values.tolist()]
+    for i in range(len(extract_concepts().values.tolist())):
 
-    print(first1)
-    print(second2)
-    print(third3)
-    print(fourth4)
-#         print(extract_concepts().loc["i"+str(i)].values.tolist()[i])
-#         # for j in extract_concepts().loc["i"+str(i)].values.tolist():
-#         #for j in extract_concepts().loc["i"+str(i)].values.tolist():
-#         item = iter(extract_concepts().loc["i"+str(i)].values.tolist())
-#         for i in range(len(len(extract_concepts().loc["i5"].values.tolist()))):
-#             # result = map(lambda x: x + x, numbers)
-#             first = [next(item) for next(item) in extract_concepts().loc["i"+str(i)].values.tolist() if next(item) in extract_concepts().loc["i"+str(i)].values.tolist()]
-#             print(next(item))
-#             print(next(item))
-#             print(next(item))
-#             print(next(item))
-#             print("end of image")
-            # if k in extract_concepts().loc["i"+str(i)].values.tolist()[i] :
-            #     print(k, "is in this image")
-            # elif l in extract_concepts().loc["i"+str(i+1)].values.tolist():
-            #     print(l," is in same image")
-            # else:
-            #     print("none")
+        item1, item2, item3, item4  = extract_concepts().loc["i"+str(i)].values.tolist()
+        for subitem in extract_concepts().values.tolist():
 
-            # if j in extract_concepts().loc[["i"+str(i)]]
+            # print(item1,item2,item3,item4)
+            # if check_if_in(item1,item2,subitem)==True:
+            #     print("true")
+            # else :
+            #     print("false")
+            if all_in((item1, item2), subitem)==True:
+                print(item1,"and",item2, "coocurs in image",i)
+            else:
+                print(item1,"and",item2," do not coocur in ", i)
 
+
+            if all_in((item1, item3), subitem)==True:
+                print(item1,"and",item3, "coocurs in image",i)
+            else:
+                print(item1,"and",item3," do not coocur in ", i)
+
+
+
+            if all_in((item1, item4), subitem)==True:
+                print(item1,"and",item4, "coocurs in image",i)
+            else:
+                print(item1,"and",item4," do not coocur in ", i)
+
+
+            if all_in((item2, item3), subitem)==True:
+                print(item2,"and",item3, "coocurs in image",i)
+            else:
+                print(item2,"and",item3," do not coocur in ", i)
+
+
+            if all_in((item2, item4), subitem)==True:
+                print(item2,"and",item4, "coocurs in image",i)
+            else:
+                print(item2,"and",item4," do not coocur in ", i)
+
+
+            if all_in((item3, item4), subitem)==True:
+                print(item1,"and",item3, "coocurs in image",i)
+            else:
+                print(item3,"and",item4," do not coocur in ", i)
             
+            
+                
+         
+
 getnl()
