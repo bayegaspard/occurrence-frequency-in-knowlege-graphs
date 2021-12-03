@@ -3,10 +3,7 @@ import math
 import numpy as np
 import random
 
-
-
 random.seed(2)
-
 
 conceptsdict_item1item2 = {}
 conceptsdict_item1item3 = {}
@@ -15,13 +12,10 @@ conceptsdict_item2item3 = {}
 conceptsdict_item2item4 = {}
 conceptsdict_item3item4 = {}
 
-
-
 concepts = "concepts.csv"
 def extract_concepts():
     df=pd.read_csv("concepts.csv", index_col="images")
     return df
-
 
 def extract_all_concepts(i):
     item = iter(extract_concepts().loc["i"+str(i)].values.tolist())
@@ -60,27 +54,22 @@ def getnllprime():
             else:
                 pass
 
-
             if all_in((item2, item3), subitem)==True:
                 conceptsdict_item2item3["coocur"+item2+item3+str(i)]=item2, item3
             else:
                 pass
-
 
             if all_in((item2, item4), subitem)==True:
                 conceptsdict_item2item4["coocur"+item2+item4+str(i)]=item2, item4
             else:
                 pass
 
-
             if all_in((item3, item4), subitem)==True:
                 conceptsdict_item3item4["coocur"+item3+item4+str(i)]=item1, item4
             else:
                 pass
-
             
 getnllprime()
-
 #function to remove duplicates
 def clean_dict(conceptsdict_item):
     temp = {val : key for key, val in conceptsdict_item.items()}
