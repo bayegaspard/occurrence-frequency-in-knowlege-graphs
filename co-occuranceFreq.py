@@ -1,17 +1,27 @@
 import pandas as pd
 import math
 import numpy as np
+import random
 
-coocurance_freq = []
+
+
+random.seed(2)
+
+
+conceptsdict_item1item2 = {}
+conceptsdict_item1item3 = {}
+conceptsdict_item1item4 = {}
+conceptsdict_item2item3 = {}
+conceptsdict_item2item4 = {}
+conceptsdict_item3item4 = {}
+
+
+
 concepts = "concepts.csv"
-# for i in range(100):
-#     print("item"+str(i)+"=[]")
-
 def extract_concepts():
     df=pd.read_csv("concepts.csv", index_col="images")
     return df
-    # print(df) 
-# print(extract_concepts().loc[["i"+str(0)]]
+
 
 def extract_all_concepts(i):
     item = iter(extract_concepts().loc["i"+str(i)].values.tolist())
@@ -29,55 +39,61 @@ def all_in(candidates, sequence):
             return False
     return True
 
-def getnl():
-    for i in range(len(extract_concepts().values.tolist())):
+f#unction to get co-occurence
 
+def getnllprime():
+    for i in range(len(extract_concepts().values.tolist())):
         item1, item2, item3, item4  = extract_concepts().loc["i"+str(i)].values.tolist()
         for subitem in extract_concepts().values.tolist():
-
-            # print(item1,item2,item3,item4)
-            # if check_if_in(item1,item2,subitem)==True:
-            #     print("true")
-            # else :
-            #     print("false")
             if all_in((item1, item2), subitem)==True:
-                print(item1,"and",item2, "coocurs in image",i)
+                conceptsdict_item1item2 ["coocur"+item1+item2+str(i)]=item1, item2
             else:
-                print(item1,"and",item2," do not coocur in ", i)
-
+                pass
 
             if all_in((item1, item3), subitem)==True:
-                print(item1,"and",item3, "coocurs in image",i)
+                conceptsdict_item1item3["coocur"+item1+item3+str(i)]=item1, item3
             else:
-                print(item1,"and",item3," do not coocur in ", i)
-
-
+                pass
 
             if all_in((item1, item4), subitem)==True:
-                print(item1,"and",item4, "coocurs in image",i)
+                conceptsdict_item1item4["coocur"+item1+item4+str(i)]=item1, item4
             else:
-                print(item1,"and",item4," do not coocur in ", i)
+                pass
 
 
             if all_in((item2, item3), subitem)==True:
-                print(item2,"and",item3, "coocurs in image",i)
+                conceptsdict_item2item3["coocur"+item2+item3+str(i)]=item2, item3
             else:
-                print(item2,"and",item3," do not coocur in ", i)
+                pass
 
 
             if all_in((item2, item4), subitem)==True:
-                print(item2,"and",item4, "coocurs in image",i)
+                conceptsdict_item2item4["coocur"+item2+item4+str(i)]=item2, item4
             else:
-                print(item2,"and",item4," do not coocur in ", i)
+                pass
 
 
             if all_in((item3, item4), subitem)==True:
-                print(item1,"and",item3, "coocurs in image",i)
+                conceptsdict_item3item4["coocur"+item3+item4+str(i)]=item1, item4
             else:
-                print(item3,"and",item4," do not coocur in ", i)
-            
-            
-                
-         
+                pass
 
-getnl()
+            
+getnllprime()
+
+#function to remove duplicates
+def clean_dict(conceptsdict_item):
+    temp = {val : key for key, val in conceptsdict_item.items()}
+    conceptsdict_item = {val : key for key, val in temp.items()}
+    return conceptsdict_item
+
+conceptsdict_item1item2 = clean_dict(conceptsdict_item1item2)
+conceptsdict_item1item3 = clean_dict(conceptsdict_item1item3)
+conceptsdict_item2item3 = clean_dict(conceptsdict_item2item3)
+conceptsdict_item2item4 = clean_dict(conceptsdict_item2item4)
+conceptsdict_item3item4 = clean_dict(conceptsdict_item3item4)
+
+#function to get nl
+
+
+#calculate coocurance frequency
