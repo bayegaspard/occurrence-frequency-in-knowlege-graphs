@@ -111,15 +111,19 @@ def group_like_items(dict_item):
 
 def show_co_occurence_frequency(dict_items):
     cnt=0
+    all_items=[]
     flipped = group_like_items(dict_items)
     for key,value in flipped.items():
         #print(key," co-occured ",len([k for k in value]), "times")
         cnt+=1
-        print(len([k for k in value]))
+        #print(len([k for k in value]))
+        all_items.append([flipped[key],flipped[key]])
+        print(all_items)
         #return len([k for k in value])
     print(cnt)
-
 
 show_co_occurence_frequency(conceptsdict_item2item3)
 
 #calculate coocurance frequency
+
+
