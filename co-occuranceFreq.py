@@ -109,21 +109,38 @@ def group_like_items(dict_item):
     return flipped
 
 
+all_freqa = []
+
 def show_co_occurence_frequency(dict_items):
-    cnt=0
-    all_items=[]
+    cnt=    all_items=[]
     flipped = group_like_items(dict_items)
     for key,value in flipped.items():
-        #print(key," co-occured ",len([k for k in value]), "times")
-        cnt+=1
+        print(key," co-occured ",len([k for k in value]), "times")
         #print(len([k for k in value]))
-        all_items.append([flipped[key],flipped[key]])
-        print(all_items)
-        #return len([k for k in value])
-    print(cnt)
+        all_items.append(key[0])
+        all_items.append(key[1])
+        if key[0] or key[1] in key:
+            #s = max(math.log(len(str([k for k in value]))/len(len(str(key[0]))*len(str(key[1])))),0)
+            s = max(math.log(len([k for k in value])/(len(str(key[0][:2]))*1)),0) #len(str(key[1][:6])))),0) 
+            print("coocurance frequency for ", key[0], key[1],"is", s)
+            all_freqa.append(s)
+        else:
+            print(0)
+            s = 0
+            all_freqa.append(s)
 
+show_co_occurence_frequency(conceptsdict_item1item2)
+show_co_occurence_frequency(conceptsdict_item1item3)
+show_co_occurence_frequency(conceptsdict_item1item4)
 show_co_occurence_frequency(conceptsdict_item2item3)
+show_co_occurence_frequency(conceptsdict_item2item4)
+show_co_occurence_frequency(conceptsdict_item3item4)
 
-#calculate coocurance frequency
-
-
+import sys
+#all_freqa = np.ndarray()
+np.set_printoptions(threshold=sys.maxsize)
+N = len(all_freqa[11:]);value = 100
+#Note all leading diagonal is 100 equivalent to 1.
+b = np.ndarray((N)).reshape(20,20)
+np.fill_diagonal(b, value)
+print(b)
